@@ -42,17 +42,17 @@
 #endif
 
 #if defined(__unix__) || defined(__APPLE__)
-#if !defined(BYTE_ORDER) || !defined(LITTLE_ENDIAN)                         
-#error No byte order defined                                                    
-#endif                                                                          
+#if !defined(BYTE_ORDER) || !defined(LITTLE_ENDIAN)
+#error No byte order defined
+#endif
 
-#if BYTE_ORDER == LITTLE_ENDIAN                                             
-#define HIOFFSET 1                                                              
-#define LOWOFFSET 0                                                             
-#else                                                                           
-#define HIOFFSET 0    /* word offset to find MSB */                             
-#define LOWOFFSET 1    /* word offset to find LSB */                            
-#endif /* __BYTE_ORDER */                                                       
+#if BYTE_ORDER == LITTLE_ENDIAN
+#define HIOFFSET 1
+#define LOWOFFSET 0
+#else
+#define HIOFFSET 0    /* word offset to find MSB */
+#define LOWOFFSET 1    /* word offset to find LSB */
+#endif /* __BYTE_ORDER */
 #include <sys/types.h>
 #define int32 int32_t
 #endif /* __unix__ or __APPLE__*/
@@ -89,7 +89,7 @@ typedef struct _phasorbars
   int dspon;
 } t_phasorbars;
 
-void phasorbars_tick(t_phasorbars *y)  
+void phasorbars_tick(t_phasorbars *y)
 {
   if(y->countstart)
     {
@@ -160,10 +160,10 @@ t_int *phasorbars_perform(t_int *w)
   tf.tf_d = UNITBIT32;
   normhipart = tf.tf_i[HIOFFSET];
   tf.tf_d = dphase;
-  while (n--) 
+  while (n--)
     {
-      //    if(y->dspon) 
-      //	{ 
+      //    if(y->dspon)
+      //	{
 	  tf.tf_i[HIOFFSET] = normhipart;
 	  y->ivalue = *in++;
 	  dphase += y->ivalue * conv; //increment
@@ -229,15 +229,15 @@ t_int *phasorbars_perform(t_int *w)
 			    }
 			  y->abletonLink = 0;
 			}
-		      if(y->value < y->prevalue) 
+		      if(y->value < y->prevalue)
 			{
 			  //post("y->cycle start = %f, y->baroffset start = %f",y->cycle,y->baroffset);
 			  y->cycle++;
 			  y->barnumber = y->cycle + y->baroffset;
 
-			  //			  if(!y->looping) 
+			  //			  if(!y->looping)
 			  //			    {
-			      if(y->nextbar >= 0) 
+			      if(y->nextbar >= 0)
 				{
 				  y->barnumber = y->nextbar;
 				  y->baroffset = y->nextbar;
@@ -290,13 +290,13 @@ t_int *phasorbars_perform(t_int *w)
 			  y->barnumber = y->cycle + y->baroffset;
 			  } */
 		    }
-		  else 
+		  else
 		    {
 		      y->bflag=0;
 		    }
 		  //		}
 		  //  }
-  
+
 	/*	else if(y->ivalue < 0) {
 	//	    } */
 	  //	  y->pflag = 1;
@@ -317,7 +317,7 @@ t_int *phasorbars_perform(t_int *w)
 	    //	    outlet_float(y->evens, 0);
 		  y->egths = eighths;
 		  y->evns = 0;
-		  if(!y->isEight) 
+		  if(!y->isEight)
 		    {
 		      y->isEight = 1;
 		      y->isEven = 1;
@@ -338,21 +338,21 @@ t_int *phasorbars_perform(t_int *w)
 		}
 	//	outlet_float(y->x_16, (t_float)squs);
 	      y->sxtnths = (t_float)squs;
-	      if(!y->isSixteen) 
+	      if(!y->isSixteen)
 		{
 		  y->isSixteen = 1;
-		  if(!(squs % 2)) 
+		  if(!(squs % 2))
 		    {
 		      y->isTwentyFour = 1;
 		    }
 		  clock_delay(y->x_clock, 0L);
 		}
 	    }
-	  else if(squts != y->sqtriplets) 
+	  else if(squts != y->sqtriplets)
 	    {
       //      outlet_float(y->x_24, (float)squts);
 	      y->twfths = (t_float)squts;
-	      if(!y->isTwentyFour) 
+	      if(!y->isTwentyFour)
 		{
 		  y->isTwentyFour = 1;
 		  clock_delay(y->x_clock, 0L);
@@ -363,7 +363,7 @@ t_int *phasorbars_perform(t_int *w)
 	  tf.tf_d = dphase;
 	  y->prevalue = y->value;
 	}
-    
+
     // Here is (a possible) problem!
     // When (x->dspon == 0) this runs...
     // maybe this should go! And countstart should be used to make the sound happen??
@@ -552,10 +552,10 @@ void phasorbars_link(t_phasorbars *x)
 void *phasorbars_new(t_symbol *s,int argc,t_atom* argv)
 {
     t_phasorbars *y = (t_phasorbars *)pd_new(phasorbars_class);
-    
+
     y->x_f = 0;
     if (argc) y->x_f = atom_getfloat(argv++),argc--;
-    
+
     inlet_new(&y->x_obj, &y->x_obj.ob_pd, &s_float, gensym("setphase"));
     //    floatinlet_new(&y->x_obj, &y->cycle);
 
@@ -593,11 +593,11 @@ void *phasorbars_new(t_symbol *s,int argc,t_atom* argv)
     y->abletonLink = 0;
 
     outlet_new(&y->x_obj, gensym("signal"));
-    
+
     y->loop = 0;
     if (argc) y->length = atom_getfloat(argv++),argc--;
     if (argc) y->loop = atom_getfloat(argv++),argc--;
-     
+
     //  y->state = 0;
 
     y->x_24 = outlet_new(&y->x_obj, &s_float);
