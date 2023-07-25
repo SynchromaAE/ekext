@@ -309,7 +309,7 @@ void maxlib_copyarray_setup(void)
 	// class_addlist(copyarray_class, copyarray_list);
 #ifndef MAXLIB
     
-    logpost(NULL, 4, version);
+    logpost(NULL, 4, "%s", version);
 #else
     class_sethelpsymbol(copyarray_class, gensym("maxlib/copyarray\\xs-help.pd"));
 #endif
