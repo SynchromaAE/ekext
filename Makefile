@@ -4,5 +4,5 @@ class.sources = bmt~.c copyarray.c cup.c cupd.c doubledelta.c floatcount.c float
 #
 datafiles = bmt~-help.pd count-help.pd count.pd cupd-help.pd cup-help.pd doubledelta-help.pd ekext-meta.pd floatcount-help.pd framescore~-help.pd framespect~-help.pd hasc~-help.pd hssc~-help.pd ihisto-help.pd lcmgcd-help.pd list_sum-help.pd maskxor-help.pd maskxor-test.pd mvcf~-help.pd polymap-help.pd polystat-help.pd positive-help.pd scalefilter-help.pd sieve-help.pd simile~-help.pd simile-help.pd steady-help.pd test_scalefilter.pd valve-help.pd voicing_detector~-help.pd wavecutter~-help.pd wavefolder~-help.pd wavestretcher~-help.pd wfold~-help.pd weightonset-help.pd zeroxpos~-help.pd README.txt LICENSE.txt
 #
-include Makefile.pdlibbuilder
-
+PDLIBBUILDER_DIR=.
+include $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder
