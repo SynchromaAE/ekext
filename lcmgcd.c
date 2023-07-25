@@ -29,16 +29,16 @@ typedef struct _lcmgcd
 
 static void lcmgcd_calculate_lcm(t_lcmgcd *z) {
   int a, b, t;
- 
+
   a = z->result;
   b = z->b;
- 
+
   while (b != 0) {
     t = b;
     b = a % b;
     a = t;
   }
- 
+
   z->gcd = a;
   z->lcm = (z->result*z->b)/a;
 }
@@ -90,7 +90,7 @@ static void lcmgcd_list(t_lcmgcd *z, t_symbol *s, int argc, t_atom *argv)
       }
     outlet_float(z->gcdOut,(t_float)z->gcdAll);
     outlet_float(z->lcmOut,(t_float)z->lcm);
- 
+
   }
   else
     {
@@ -102,7 +102,7 @@ static void lcmgcd_list(t_lcmgcd *z, t_symbol *s, int argc, t_atom *argv)
 static void *lcmgcd_new()
 {
   t_lcmgcd *z = (t_lcmgcd *)pd_new(lcmgcd_class);
-  z->result = 1;  
+  z->result = 1;
   z->lcm = 1;
   z->gcd = 1;
   z->gcdAll = 1;
@@ -113,7 +113,7 @@ static void *lcmgcd_new()
 
 void lcmgcd_setup(void)
 {
-  lcmgcd_class = class_new(gensym("lcmgcd"), (t_newmethod)lcmgcd_new, 
+  lcmgcd_class = class_new(gensym("lcmgcd"), (t_newmethod)lcmgcd_new,
 			      0, sizeof(t_lcmgcd), 0 ,A_GIMME, 0);
   class_addlist    (lcmgcd_class, lcmgcd_list);
 }
