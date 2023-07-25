@@ -16,7 +16,6 @@ class.sources = \
 	ihisto.c \
 	lcmgcd.c \
 	list_sum.c \
-	markovChains.c \
 	maskxor.c \
 	mvcf~.c \
 	ninjacount.c \
